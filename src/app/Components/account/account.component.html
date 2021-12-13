@@ -1,0 +1,77 @@
+<h2 class="card-header">{{"ModifyAccount" | translate }}</h2>
+<div class="card-body size50">
+  <form form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label>{{'LastName' | translate }}</label>
+      <input class="form-control " formControlName="lastName" [value]="form.value.lastName">
+      <div *ngIf="submitted && f.lastName.errors" class="is-invalid text-danger">
+        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+        <div *ngIf="f.lastName.errors.pattern">Forbidden character</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>{{'FirstName' | translate }}</label>
+      <input class="form-control" formControlName="firstName" [value]="form.value.firstName">
+      <div *ngIf="submitted && f.firstName.errors" class="is-invalid text-danger">
+        <div *ngIf="f.firstName.errors.required">First Name is required</div>
+        <div *ngIf="f.firstName.errors.pattern">Forbidden character</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>{{'Street' | translate }}</label>
+      <input class="form-control" formControlName="street" [value]="form.value.street">
+      <div *ngIf="submitted && f.street.errors" class="is-invalid text-danger">
+        <div *ngIf="f.street.errors.required">Street is required</div>
+        <div *ngIf="f.street.errors.pattern">Forbidden character</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>{{'HouseNumber' | translate }}</label>
+      <input class="form-control" formControlName="houseNumber" [value]="form.value.houseNumber">
+      <div *ngIf="submitted && f.houseNumber.errors" class="is-invalid text-danger">
+        <div *ngIf="f.houseNumber.errors.required">House number is required</div>
+        <div *ngIf="f.houseNumber.errors.pattern">Forbidden character</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>{{'ZipCode' | translate }}</label>
+      <input class="form-control" formControlName="zipCode" [value]="form.value.zipCode">
+      <div *ngIf="submitted && f.zipCode.errors" class="is-invalid text-danger">
+        <div *ngIf="f.zipCode.errors.required">ZipCode is required</div>
+        <div *ngIf="f.zipCode.errors.pattern">Forbidden character</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>{{'City' | translate }}</label>
+      <input class="form-control" formControlName="city" [value]="form.value.city">
+      <div *ngIf="submitted && f.city.errors" class="is-invalid text-danger">
+        <div *ngIf="f.city.errors.required">City is required</div>
+        <div *ngIf="f.city.errors.pattern">Forbidden character</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>{{'Country' | translate }}</label>
+      <div>
+        <mat-select-country class="form-control" appearance="outline"
+                            [formControl]="countryFormControl"
+                            (onCountrySelected)="convertCountryInCountryCode()">
+        </mat-select-country>
+      </div>
+    </div>
+    <p></p>
+    <input type="submit" class="btn btn-primary" value="{{'Update' | translate }}">
+
+  </form>
+  <div *ngIf="!addressCompleted && orderService.orderInProgress"
+       class="alert alert-danger"> {{'CompleteAddressMessage' | translate }}</div>
+  <p></p>
+  <button *ngIf="addressCompleted && orderService.orderInProgress" (click)="goBackToOrder()"
+          class="btn btn-primary btn-sm text-white bold">{{'ContinueOrder' | translate }}</button>
+</div>

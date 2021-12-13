@@ -1,0 +1,23 @@
+<h2 class="card-header">{{"Inventory"|translate}}</h2>
+<div class="card-body">
+  <form form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <label>{{'movieId' | translate }}</label>
+    <input class="form-control" formControlName="movieId" style="width:50%" [value]="form.value.movieId">
+    <div *ngIf="submitted && f.movieId.errors" class="is-invalid text-danger">
+      <div *ngIf="f.movieId.errors.required">MovieId is required</div>
+      <div *ngIf="f.movieId.errors.pattern">Forbidden character</div>
+    </div>
+
+    <label>{{'Quantity' | translate }}</label>
+    <input class="form-control" formControlName="stockAfterInventory" style="width:50%"
+           [value]="form.value.stockAfterInventory">
+    <div *ngIf="submitted && f.stockAfterInventory.errors" class="is-invalid text-danger">
+      <div *ngIf="f.stockAfterInventory.errors.required">Quantity is required</div>
+      <div *ngIf="f.stockAfterInventory.errors.pattern">Forbidden character</div>
+    </div>
+    <p></p>
+    <input type="submit" class="btn btn-primary" value="{{'Save' | translate }}">
+
+  </form>
+</div>

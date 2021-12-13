@@ -1,0 +1,52 @@
+<div>
+  <!--action movie-->
+  <h2 *ngIf="!search" class="mb-0 text-white">{{'action' | translate }} <span class="alert-danger"
+                                                                                       *ngIf="discountAction">  {{'Discount'|translate}}
+    -{{discountAction}}%</span></h2>
+  <owl-carousel-o *ngIf="!search" [options]="customOptions">
+    <ng-container *ngFor="let slide of actionMovies">
+      <ng-template carouselSlide>
+        <img class="mb-0" [src]="slide.pictureUrl" [title]="slide.titleEn"
+             (dblclick)="openMovieProfile(slide)">
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+
+  <!--drama movie-->
+  <h2 *ngIf="!search" class="mb-0 text-white">{{'drama' | translate }} <span class="alert-danger"
+                                                                                      *ngIf="discountDrama">  {{'Discount'|translate}}
+    -{{discountDrama}}%</span></h2>
+  <owl-carousel-o *ngIf="!search" [options]="customOptions">
+    <ng-container *ngFor="let slide of dramaMovies">
+      <ng-template carouselSlide>
+        <img class="mb-0" [src]="slide.pictureUrl" [title]="slide.titleEn"
+             (dblclick)="openMovieProfile(slide)">
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+
+  <!--thriller movie-->
+  <h2 *ngIf="!search" class="mb-0 text-white">{{'thriller' | translate }} <span class="alert-danger"
+                                                                                      *ngIf="discountThriller">  {{'Discount'|translate}}
+    -{{discountThriller}}%</span></h2>
+  <owl-carousel-o  *ngIf="!search" [options]="customOptions">
+    <ng-container *ngFor="let slide of thrillerMovies">
+      <ng-template carouselSlide>
+        <img class=" mb-0" [src]="slide.pictureUrl" [title]="slide.titleEn"
+             (dblclick)="openMovieProfile(slide)">
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+
+  <!--search results movies-->
+  <h2 *ngIf="search" class="mb-0 text-white">{{"SearchResults" | translate}}</h2>
+  <owl-carousel-o *ngIf="search" [options]="customOptions">
+    <ng-container *ngFor="let slide of filterMovies">
+      <ng-template carouselSlide>
+        <img class="mb-0" [src]="slide.pictureUrl" [title]="slide.titleEn" (dblclick)="openMovieProfile(slide)">
+      </ng-template>
+    </ng-container>
+  </owl-carousel-o>
+
+</div>
+

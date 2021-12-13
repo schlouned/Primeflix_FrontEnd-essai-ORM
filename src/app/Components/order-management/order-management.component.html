@@ -1,0 +1,45 @@
+<h2 class="card-header">{{"Orders" | translate }}</h2>
+<section class="card bg-black mb-0 text-white">
+  <div>
+    <div class="container m-md-5">
+      <div class="row mt-5">
+        <div class="col-lg-9">
+          <div class="row">
+            <table class="table text-white" *ngIf="orders">
+              <tr>
+                <th class="b-0 ">{{"OrderId" | translate}}</th>
+                <th class="b-0">{{"Client" | translate}}</th>
+                <th class="b-0">{{"OrderDate" | translate}}</th>
+                <th class="b-0">{{"OrderAmount" | translate}}</th>
+                <th class="b-0">{{"OrderStatus" | translate}}</th>
+                <th *ngIf="allowed" class="b-0">{{"Action" | translate}}</th>
+              </tr>
+              <tr *ngFor="let order of orders">
+                <td>
+                  <p>{{order.id}}</p>
+                </td>
+                <td>
+                  <p>{{order.cart.user.lastName}} {{order.cart.user.firstName}}</p>
+                </td>
+                <td>
+                  <p>{{order.date}}</p>
+                </td>
+                <td>
+                  <p>{{order.totalCost}}</p>
+                </td>
+                <td>
+                  <p>{{order.orderState}}</p>
+                </td>
+                <td *ngIf="allowed && order.orderState!='DELIVERED'">
+                  <button class="btn btn-primary btn-sm text-white bold"
+                          (click)="orderNextStatus(order.id)">{{"NextStatus"|translate}}</button>
+                </td>
+              </tr>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

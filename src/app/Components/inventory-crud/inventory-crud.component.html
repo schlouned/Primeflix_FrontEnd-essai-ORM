@@ -1,0 +1,79 @@
+<h2 class="card-header">{{"CrudInventory"|translate}}</h2>
+<div class="panel panel-default">
+  <!--<button (click)="updateInventory(newInventory, mymodal)" class="btn btn-primary">{{"AddInventory"|translate}}</button>-->
+  <p></p>
+  <div class="panel-body">
+    <table class="table table-sm text-white">
+      <thead class="thead-light ">
+      <tr class="h4">
+        <th>{{"MovieId"|translate}}</th>
+        <th>{{"Date"|translate}}</th>
+        <th>{{"StockBefore"|translate}}</th>
+        <th>{{"StockAfter"|translate}}</th>
+        <th>{{"Difference"|translate}}</th>
+        <th>{{"Action"|translate}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let inventory of inventories ">
+        <td>{{inventory.movie.id}}</td>
+        <td>{{inventory.date}}</td>
+        <td>{{inventory.stockBeforeInventory}}</td>
+        <td>{{inventory.stockAfterInventory}}</td>
+        <td>{{inventory.difference}}</td>
+        <td>
+         <!-- <button (click)="deleteInventory(inventory)" class='btn btn-danger'>{{"Delete"|translate}}</button>&nbsp;
+          <button (click)="updateInventory(inventory, mymodal)" class='btn btn-success'>{{"Update"|translate}}</button> -->
+        </td>
+      </tr>
+      </tbody>
+      <br>
+    </table>
+  </div>
+</div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header text-black">
+    <h2 class="modal-title text-black" id="modal-basic-title">{{"InventoryProfile"|translate}}</h2>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h2 class="modal-title text-black" style="text-align: center">{{"UpdateSaveInventory"|translate}}</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <input type="hidden" class="form-control" formControlName="id" [value]="form.value.id">
+
+      <div class="form-group">
+        <label>{{"MovieId"|translate}}</label>
+        <input type="text" class="form-control" formControlName="lastName" [value]="form.value.movieId">
+      </div>
+
+      <div class="form-group">
+        <label>{{"StockBefore"|translate}}</label>
+        <input type="text" class="form-control" formControlName="firstName" [value]="form.value.stockBeforeInventory">
+      </div>
+
+      <div class="form-group">
+        <label>{{"StockAfter"|translate}}</label>
+        <input type="text" class="form-control" formControlName="email" [value]="form.value.stockAfterInventory">
+      </div>
+
+      <div class="form-group">
+        <label>{{'Difference' | translate }}</label>
+        <input type="text" class="form-control" formControlName="street" [value]="form.value.difference">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-success" value="{{'Save' | translate }}">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="modal.dismiss('Cross click')">{{"Close"|translate}}</button>
+      </div>
+
+    </form>
+  </div>
+
+</ng-template>
+

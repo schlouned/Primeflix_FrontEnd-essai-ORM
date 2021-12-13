@@ -1,0 +1,28 @@
+<h2 class="card-header">{{"OrderValidated" | translate }}</h2>
+<h3 class="b-0">{{"OrderSummary" | translate}}</h3>
+  <h4 class="b-0">{{"Products" | translate}}</h4>
+  <table >
+    <tr>
+      <th class="b-0 ">{{"Movie" | translate}}</th>
+      <th class="b-0">{{"title" | translate}}</th>
+    </tr>
+    <tr *ngFor="let item of order.cart.cartItems">
+      <td>
+        <img height="100px" class="bg-black mb-0" [src]="item.movie.pictureUrl">
+      </td>
+      <td><p *ngIf="language=='en'">{{item.movie.titleEn}}</p>
+        <p *ngIf="language=='fr'">{{item.movie.titlefr}}</p>
+      </td>
+    </tr>
+  </table>
+  <h4 class="b-0">{{"CartCost" | translate}}</h4>
+  <p>{{order.cartCost}}€</p>
+  <h4 class="b-0" *ngIf="order.deliveryType == 'DELIVERY'" class="b-0">{{"DeliveryCost"|translate}}</h4>
+  <p *ngIf="order.deliveryType == 'DELIVERY'"> {{order.deliveryCost}}€</p>
+  <h4 class="b-0">{{"Total"|translate}}</h4>
+  <p>{{order.totalCost}}€</p>
+  <button class="btn btn-primary btn-sm text-white bold"
+          (click)="deleteOrder()">{{"DeleteOrder"|translate}}</button>
+  <button class="btn btn-primary btn-sm text-white bold"
+          routerLink="/payment">{{"GoToPayment"|translate}}</button>
+

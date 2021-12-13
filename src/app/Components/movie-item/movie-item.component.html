@@ -1,0 +1,40 @@
+<h2 class="card-header">{{"MovieItem" | translate }}</h2>
+<div class="card bg-black mb-0 text-white">
+  <div class="card-body">
+    <!--Title fr/en-->
+    <h1 class="mb-0 pb-0">{{'title'|translate}}</h1>
+    <h2 *ngIf="language=='en'">{{movie.titleEn}}</h2>
+    <h2 *ngIf="language=='fr'">{{movie.titlefr}}</h2>
+    <!--movie picture-->
+    <img height="400px" class="bg-black mb-0" [src]="movie.pictureUrl">
+    <!--release year-->
+    <h2 class="mb-0 pb-0">{{'releaseYear'|translate}}</h2>
+    <p>{{movie.releaseYear}}</p>
+    <!--summary-->
+    <h2 class="mb-0 pb-0">{{'summary'|translate}}</h2>
+    <p *ngIf="language=='en'">{{movie.summaryEn}}</p>
+    <p *ngIf="language=='fr'">{{movie.summaryFr}}</p>
+    <!--producer-->
+    <h3 class="mb-0 pb-0">{{'producer'|translate}}</h3>
+    <p>{{movie.productor.firstName}} {{movie.productor.lastName}}</p>
+    <!--actors-->
+    <h3 class="mb-0 pb-0">{{'actors'|translate}}</h3>
+    <div *ngFor="let actor of movie.actors">
+      <p class="mb-0 pb-0">{{actor.firstName}} {{actor.lastName}}</p>
+    </div>
+    <p></p>
+    <!--category-->
+    <h3 class="mb-0 pb-0">{{'category'|translate}}</h3>
+    <p>{{movie.category.name | translate}}</p>
+    <!--Price-->
+    <h3 class="mb-0 pb-0">{{'price'|translate}}</h3>
+    <p>{{movie.price}} € <span class="alert-danger" *ngIf="movie.category.discount">  -{{movie.category.discount.percentage}}%</span></p>
+    <!--stock quantity-->
+    <h3 class="mb-0 pb-0">{{'stock'|translate}}</h3>
+    <p>{{movie.stockQuantity}} pce</p>
+
+    <!--add to cart-->
+    <button class="btn btn-primary" style="text-align: right" (click)="addToCart(movie.id)">Add to cart</button>
+
+  </div>
+</div>

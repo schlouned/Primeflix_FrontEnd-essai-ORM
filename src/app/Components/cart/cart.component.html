@@ -1,0 +1,62 @@
+<h2 class="card-header">{{"Cart" | translate }}</h2>
+<section class="card bg-black mb-0 text-white">
+  <div>
+    <div class="container m-md-5">
+      <div class="row mt-5">
+        <div class="col-lg-9">
+          <div class="row">
+            <table class="table text-white" *ngIf="cart">
+              <tr>
+                <th class="b-0 ">{{"Movie" | translate}}</th>
+                <th class="b-0">{{"title" | translate}}</th>
+                <th class="b-0">{{"price" | translate}}</th>
+                <th class="b-0">%</th>
+                <th class="b-0">{{"NetPrice" | translate}}</th>
+                <th class="b-0">{{"stock" | translate}}</th>
+                <th class="b-0">{{"Quantity" | translate}}</th>
+                <th class="b-0">{{"SubTotal" | translate}}</th>
+                <th class="b-0">{{"Delete" | translate}}</th>
+              </tr>
+              <tr *ngFor="let item of cart.cartItems">
+                <td>
+                  <img height="100px" class="bg-black mb-0" [src]="item.movie.pictureUrl">
+                </td>
+                <td><p *ngIf="language=='en'">{{item.movie.titleEn}}</p>
+                  <p *ngIf="language=='fr'">{{item.movie.titlefr}}</p>
+                </td>
+                <td>{{ item.movie.price }}€</td>
+                <td><span
+                  *ngIf="item.movie.category.discount; else noDiscount">{{item.movie.category.discount.percentage}}
+                  %</span>
+                  <ng-template #noDiscount>&nbsp; 0%</ng-template>
+                </td>
+                <td><span
+                  *ngIf="item.movie.category.discount; else noNewPrice">{{calculatePriceWithDiscount(item)}}€</span>
+                  <ng-template #noNewPrice>&nbsp;&nbsp;{{ item.movie.price }}€</ng-template>
+                </td>
+                <td [ngClass]="(item.movie.stockQuantity < item.quantity)?'bg-danger':''">{{ item.movie.stockQuantity }}</td>
+                <td>
+                  <button class="btn btn-primary btn-sm text-white bold" (click)="increaseQuantity(item)">+</button>
+                  {{ item.quantity }}
+                  <button class="btn btn-primary btn-sm text-white bold" (click)="decreaseQuantity(item)">-</button>
+                </td>
+                <td>{{ calculateSubTotalPrice(item) }}€</td>
+                <td>
+                  <button class="btn btn-primary btn-sm text-white bold" (click)="deleteCartItem(item)">Delete</button>
+                </td>
+              </tr>
+            </table>
+            <h2 class="container-sm text-white text-end">{{"Total"|translate}}: {{calculateTotal()}}€</h2>
+            <button class="btn btn-primary btn-sm text-white bold"
+                    (click)="continueShopping()">{{"ContinueShopping"|translate}}
+            </button>
+            <p></p>
+            <button *ngIf="!ckeckIfCartEmpty()" class="btn btn-primary btn-sm text-white bold"
+                    (click)="order()">{{"Order"|translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

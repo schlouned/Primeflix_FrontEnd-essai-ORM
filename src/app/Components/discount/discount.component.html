@@ -1,0 +1,52 @@
+<h2 class="card-header">{{"Discount"|translate}}</h2>
+<div class="card-body size50">
+  <form [formGroup]="form" id="formId" (ngSubmit)="onSubmit()">
+    <!-- category-->
+    <div class="form-group">
+      <label>{{'category' | translate}}</label>
+      <select formControlName="category" id="category" class="form-select d-flex align-items-start">
+        <option *ngFor="let category of categories; let i = index" [value]="categories[i].id">
+          {{categories[i].name | translate}}
+        </option>
+      </select>
+      <div *ngIf="submitted && f.category.errors" class="is-invalid text-danger">
+        <div *ngIf="f.category.errors.required">Category is required</div>
+      </div>
+    </div>
+
+    <!--start date-->
+    <div class="form-group">
+      <label>{{'StartDate'|translate}}</label>
+      <input type="date" useValueAsDate formControlName="startDate" class="form-control">
+      <div *ngIf="submitted && f.startDate.errors" class="is-invalid text-danger">
+        <div *ngIf="f.startDate.errors.required">Start date is required</div>
+      </div>
+    </div>
+
+    <!--end date-->
+    <div class="form-group">
+      <label>{{'EndDate'|translate}}</label>
+      <input type="date" useValueAsDate formControlName="endDate" class="form-control"
+             placeholder="yyyy-mm-dd">
+      <div *ngIf="submitted && f.endDate.errors" class="is-invalid text-danger">
+        <div *ngIf="f.endDate.errors.required">End date is required</div>
+      </div>
+
+    </div>
+
+    <!--percentage-->
+    <div class="form-group">
+      <label>{{'Percentage'|translate}}</label>
+      <input type="text" formControlName="percentage" class="form-control" placeholder="%">
+      <div *ngIf="submitted && f.percentage.errors" class="is-invalid text-danger">
+        <div *ngIf="f.percentage.errors.required">Percentage is required</div>
+        <div *ngIf="f.percentage.errors.pattern">Forbidden character</div>
+      </div>
+    </div>
+    <p></p>
+
+    <!-- submit-->
+    <input type="submit" class="btn btn-primary" value="{{'Save' | translate }}">
+    <label *ngIf="form.errors" class="is-invalid text-danger">{{ form.errors?.dates | json }}</label>
+  </form>
+</div>

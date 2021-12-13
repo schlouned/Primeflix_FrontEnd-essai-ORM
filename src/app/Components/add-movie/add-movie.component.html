@@ -1,0 +1,18 @@
+<h2 class="card-header">{{"AddMovie" | translate }}</h2>
+<div class="card-body size50">
+  <div class="row">
+    <div class="col-8">
+      <label class="btn btn-default p-0">
+        <input type="file" (change)="selectFile($event)">
+      </label>
+      <p *ngIf="fileUploaded">{{"FileUploaded"}}</p>
+    </div>
+
+    <div class="col-4">
+      <button class="btn btn-success btn-sm" [disabled]="!selectedFiles" (click)="upload()">
+        {{"UploadFile"|translate}}
+      </button>
+    </div>
+  </div>
+</div>
+

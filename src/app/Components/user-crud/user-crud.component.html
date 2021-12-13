@@ -1,0 +1,99 @@
+<h2 class="card-header">{{"CrudUser"|translate}}</h2>
+<div class="panel panel-default">
+  <button (click)="updateUser(newUser, mymodal)" class="btn btn-primary">{{"AddUser"|translate}}</button>
+  <p></p>
+  <div class="panel-body">
+    <table class="table table-sm text-white">
+      <thead class="thead-light ">
+      <tr class="h4">
+        <th>{{"LastName"|translate}}</th>
+        <th>{{"FirstName"|translate}}</th>
+        <th>{{"Action"|translate}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users ">
+        <td>{{user.lastName}}</td>
+        <td>{{user.firstName}}</td>
+        <td>
+          <button (click)="deleteUser(user)" class='btn btn-danger'>{{"Delete"|translate}}</button>&nbsp;
+          <button (click)="updateUser(user, mymodal)" class='btn btn-success'>{{"Update"|translate}}</button>
+        </td>
+      </tr>
+      </tbody>
+      <br>
+    </table>
+  </div>
+</div>
+
+<ng-template #mymodal let-modal>
+  <div class="modal-header">
+    <h2 class="modal-title text-black" id="modal-basic-title">{{"UserProfile"|translate}}</h2>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body text-black">
+    <h2 class="modal-title text-black" style="text-align: center">{{"UpdateSaveUser"|translate}}</h2>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <input type="hidden" class="form-control" formControlName="id" [value]="form.value.id">
+
+      <div class="form-group">
+        <label>{{"LastName"|translate}}</label>
+        <input type="text" class="form-control" formControlName="lastName" [value]="form.value.lastName">
+      </div>
+
+      <div class="form-group">
+        <label>{{"FirstName"|translate}}</label>
+        <input type="text" class="form-control" formControlName="firstName" [value]="form.value.firstName">
+      </div>
+
+      <div class="form-group">
+        <label>{{"Email"|translate}}</label>
+        <input type="text" class="form-control" formControlName="email" [value]="form.value.email">
+      </div>
+
+      <div class="form-group">
+        <label>{{"Role"|translate}}</label>
+        <select class="form-control" formControlName="role" required>
+          <option value="CLIENT" [selected]="'CLIENT' == form.value.role">CLIENT</option>
+          <option value="STOREKEEPER" [selected]="'STOREKEEPER' == form.value.role">STOREKEEPER</option>
+          <option value="MARKETINGMANAGER" [selected]="'MARKETINGMANAGER' == form.value.role">MARKETINGMANAGER
+          </option>
+          <option value="ADMIN" [selected]="'ADMIN' == form.value.role">ADMIN</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>{{'Street' | translate }}</label>
+        <input type="text" class="form-control" formControlName="street" [value]="form.value.street">
+      </div>
+
+      <div class="form-group">
+        <label>{{'HouseNumber' | translate }}</label>
+        <input type="text" class="form-control" formControlName="houseNumber"
+               [value]="form.value.houseNumber">
+      </div>
+
+      <div class="form-group">
+        <label>{{'ZipCode' | translate }}</label>
+        <input type="text" class="form-control" formControlName="zipCode" [value]="form.value.zipCode">
+      </div>
+
+      <div class="form-group">
+        <label>{{'City' | translate }}</label>
+        <input type="text" class="form-control" formControlName="city" [value]="form.value.city">
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <input type="submit" class="btn btn-success" value="{{'Save' | translate }}">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"
+                (click)="modal.dismiss('Cross click')">{{"Close"|translate}}</button>
+      </div>
+
+    </form>
+  </div>
+
+</ng-template>

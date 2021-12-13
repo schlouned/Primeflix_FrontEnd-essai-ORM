@@ -1,0 +1,34 @@
+<h2 class="card-header">{{"Order"|translate}}</h2>
+<div class="card-body">
+  <button id="deliveryButton" class="btn btn-primary btn-sm text-white bold" [disabled]=orderService.pickUpSelected
+          (click)="delivery()">{{"Delivery"|translate}}</button>
+  <button id="pickUpButton" class="btn btn-primary btn-sm text-white bold" [disabled]=orderService.deliverySelected
+          (click)="pickUp()">{{"PickUp"|translate}}</button>
+  <p></p>
+
+  <div *ngIf="orderService.deliverySelected">
+    <h2>{{"DeliveryText"|translate}}</h2>
+    <p *ngIf="orderService.deliverySelected">{{lastName}}</p>
+    <p *ngIf="orderService.deliverySelected">{{firstName}}</p>
+    <p>{{userStreet}}, {{userHouseNumber}}</p>
+    <p>{{userZipCode}} {{userCity}}</p>
+    <p>{{userCountry}}</p>
+    <button *ngIf="!orderService.addressCompleted" routerLink="/account"
+            class="btn btn-primary btn-sm text-white bold">{{'CompleteAddress' | translate }}</button>
+
+  </div>
+
+  <div *ngIf="orderService.pickUpSelected">
+    <h2>{{"PickUpText"|translate}}</h2>
+    <p *ngIf="orderService.pickUpSelected">{{companyName}}</p>
+    <p>{{companyStreet}}, {{companyHouseNumber}}</p>
+    <p>{{companyZipCode}} {{companyCity}}</p>
+    <p>{{companyCountry}}</p>
+  </div>
+
+  <button *ngIf="orderService.addressCompleted" id="validateOrderButton" class="btn btn-primary btn-sm text-white bold"
+          (click)="validateOrder()">{{"ValidateOrder"|translate}}</button>
+</div>
+
+
+

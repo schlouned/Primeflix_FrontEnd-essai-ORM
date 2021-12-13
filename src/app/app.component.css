@@ -1,0 +1,9 @@
+.size50{
+  width:50%
+}
+
+@media screen and (max-width: 800px) {
+  .size50{
+    width:100%
+  }
+}
